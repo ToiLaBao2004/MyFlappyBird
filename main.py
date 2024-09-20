@@ -17,7 +17,7 @@ pygame.init()
 screen = pygame.display.set_mode((configs.SCREEN_WIDTH, configs.SCREEN_HEIGHT))
 
 # Đặt tiêu đề cho cửa sổ trò chơi
-pygame.display.set_caption("Flappy Bird Game v1.0.2")
+pygame.display.set_caption("Flappy Bird Game")
 
 # Tải biểu tượng cho cửa sổ trò chơi
 img = pygame.image.load('assets/icons/red_bird.png')
