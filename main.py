@@ -55,6 +55,9 @@ def create_sprites():
 # Khởi tạo các đối tượng chim, thông điệp bắt đầu, và điểm số
 bird, game_start_message, score = create_sprites()
 
+# Khởi tạo biến để theo dõi thời gian
+gameover_time = 0  # Thời gian game over xảy ra
+
 # Vòng lặp chính của trò chơi
 while running:
     for event in pygame.event.get():
@@ -76,10 +79,12 @@ while running:
 
             # Đặt lại trò chơi khi nhấn phím ESC hoặc click chuột trong trạng thái game over
             if gameover:
-                gameover = False
-                gamestarted = False
-                sprites.empty()  # Xóa tất cả sprite
-                bird, game_start_message, score = create_sprites()  # Tạo lại các đối tượng
+                # Chỉ cho phép thao tác sau khi đã qua 1 giây kể từ lúc gameover
+                if pygame.time.get_ticks() - gameover_time >= 1000:
+                    gameover = False
+                    gamestarted = False
+                    sprites.empty()  # Xóa tất cả sprite
+                    bird, game_start_message, score = create_sprites()  # Tạo lại các đối tượng
 
             # Nếu trò chơi đang chạy, xử lý sự kiện cho chim
             if gamestarted and not gameover:
@@ -102,6 +107,7 @@ while running:
         GameOverMessage(sprites)  # Hiển thị thông điệp kết thúc
         pygame.time.set_timer(column_create_event, 0)  # Dừng việc tạo cột mới
         assets.play_audio("hit")  # Phát âm thanh va chạm
+        gameover_time = pygame.time.get_ticks()  # Ghi nhận thời điểm game over
 
     # Cập nhật điểm số khi chim đã vượt qua cột
     for sprite in sprites:
