@@ -11,7 +11,7 @@ class Column(pygame.sprite.Sprite):
         self._layer = Layer.OBSTACLE
 
         # Khoảng cách giữa ống trên và ống dưới
-        self.gap = 50
+        self.gap = 30
 
         # Tải sprite cho ống (pipe) từ tài nguyên
         self.sprite = assets.get_sprite("pipe")
